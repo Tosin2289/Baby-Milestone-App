@@ -1,7 +1,27 @@
 import 'package:flutter/material.dart';
 
-class AddNewMileStonrScreen extends StatelessWidget {
+class AddNewMileStonrScreen extends StatefulWidget {
   const AddNewMileStonrScreen({super.key});
+
+  @override
+  State<AddNewMileStonrScreen> createState() => _AddNewMileStonrScreenState();
+}
+
+class _AddNewMileStonrScreenState extends State<AddNewMileStonrScreen> {
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2015),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +68,22 @@ class AddNewMileStonrScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text(""),
+                Row(
+                  children: [
+                    const Text("Select Date"),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    TextButton(
+                        onPressed: () => _selectDate(context),
+                        child: Text("${selectedDate.toLocal()}".split(' ')[0])),
+                  ],
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 TextField(
-                  maxLines: 50,
+                  maxLines: 10,
                   decoration: InputDecoration(
                     hintText: "Milestone Description",
                     border: OutlineInputBorder(
@@ -74,7 +104,13 @@ class AddNewMileStonrScreen extends StatelessWidget {
                   height: 50,
                   width: double.infinity,
                   child: ElevatedButton(
-                      onPressed: () {}, child: const Text("Record Milestone")),
+                      style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                      onPressed: () {},
+                      child: const Text("Record Milestone")),
                 ),
               ],
             ),
