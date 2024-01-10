@@ -3,11 +3,13 @@ import 'package:baby_milestone_app/src/views/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-
+  await Hive.initFlutter();
+  await Hive.openBox("myBox");
   runApp(const MyApp());
 }
 
