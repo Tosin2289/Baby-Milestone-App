@@ -29,6 +29,7 @@ class _AddNewMileStonrScreenState extends State<AddNewMileStonrScreen> {
 
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +55,7 @@ class _AddNewMileStonrScreenState extends State<AddNewMileStonrScreen> {
                               icon: const Icon(Icons.add, color: Colors.grey),
                               onPressed: () {
                                 controller.pickedImageFileFromGallery();
+                                setState(() {});
                               },
                             ),
                           )
@@ -63,6 +65,7 @@ class _AddNewMileStonrScreenState extends State<AddNewMileStonrScreen> {
                   height: 50,
                 ),
                 TextField(
+                  controller: titleController,
                   decoration: InputDecoration(
                     hintText: "Milestone Title",
                     border: OutlineInputBorder(
@@ -94,6 +97,7 @@ class _AddNewMileStonrScreenState extends State<AddNewMileStonrScreen> {
                   height: 10,
                 ),
                 TextField(
+                  controller: descriptionController,
                   maxLines: 10,
                   decoration: InputDecoration(
                     hintText: "Milestone Description",
@@ -127,9 +131,7 @@ class _AddNewMileStonrScreenState extends State<AddNewMileStonrScreen> {
                             selectedDate.toLocal().toString(),
                             controller.pickedFile.value!);
 
-                        Navigator.of(context).pop;
-                        titleController.clear();
-                        descriptionController.clear();
+                        Navigator.pop(context);
                       },
                       child: const Text("Record Milestone")),
                 ),

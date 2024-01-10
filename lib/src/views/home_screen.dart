@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
             if (controller.milestones.isNotEmpty)
               Obx(() {
                 return Expanded(
-                  child: ListView.separated(reverse:true,
+                  child: ListView.separated(
                       separatorBuilder: (context, index) => const SizedBox(
                             height: 10,
                           ),

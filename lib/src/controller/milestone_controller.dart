@@ -17,8 +17,9 @@ class MilestoneController extends GetxController {
     pickedFile = Rx<File?>(File(imageFile!.path));
   }
 
-  addToList(String title, String description, String time, File imgpath) {
-    milestones.add(Milestone(
-        title: title, description: description, image: imgpath, time: time));
+  void addToList(String title, String description, String time, File imgpath) {
+    var newdata = Milestone(
+        title: title, description: description, image: imgpath, time: time);
+    milestones.add(newdata);
   }
 }
