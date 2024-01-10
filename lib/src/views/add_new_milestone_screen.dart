@@ -1,3 +1,4 @@
+import 'package:baby_milestone_app/src/controller/milestone_controller.dart';
 import 'package:flutter/material.dart';
 
 class AddNewMileStonrScreen extends StatefulWidget {
@@ -14,15 +15,17 @@ class _AddNewMileStonrScreenState extends State<AddNewMileStonrScreen> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime(2015),
+      firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
-    if (picked != null && picked != selectedDate)
+    if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
       });
+    }
   }
 
+  var controller = MilestoneController.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,12 +45,16 @@ class _AddNewMileStonrScreenState extends State<AddNewMileStonrScreen> {
                 CircleAvatar(
                     backgroundColor: Colors.grey.shade200,
                     radius: 80,
-                    child: Center(
-                      child: IconButton(
-                        icon: const Icon(Icons.add, color: Colors.grey),
-                        onPressed: () {},
-                      ),
-                    )),
+                    child: controller.pickedFile == null
+                        ? Center(
+                            child: IconButton(
+                              icon: const Icon(Icons.add, color: Colors.grey),
+                              onPressed: () {
+                                controller.pickedImageFileFromGallery();
+                              },
+                            ),
+                          )
+                        : Image.memory(bytes)),
                 const SizedBox(
                   height: 50,
                 ),

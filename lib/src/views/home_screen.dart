@@ -1,10 +1,19 @@
+import 'package:baby_milestone_app/src/controller/milestone_controller.dart';
 import 'package:baby_milestone_app/src/views/details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'add_new_milestone_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  var controller = Get.put(MilestoneController());
 
   @override
   Widget build(BuildContext context) {
@@ -43,127 +52,84 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            InkWell(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const DetailsScreen();
-                }));
-              },
-              child: Container(
-                height: 124,
-                decoration: BoxDecoration(
-                    color: Colors.blue.shade300,
-                    borderRadius: BorderRadius.circular(15)),
-                child: const Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "MileStone Title",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 3,
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Date Posted",
-                            style: TextStyle(
-                              color: Colors.white54,
-                              fontSize: 12,
+            controller.milestones.isNotEmpty
+                ? Expanded(
+                    child: ListView.separated(
+                        separatorBuilder: (context, index) => const SizedBox(
+                              height: 10,
                             ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "MileStone Description hwiw ocjowejnwd edjiojwewii eauh esh tyrftxe fjcyrytvtty uywehuh ws",
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
+                        itemCount: controller.milestones.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return const DetailsScreen();
+                              }));
+                            },
+                            child: Container(
+                              height: 124,
+                              decoration: BoxDecoration(
+                                  color: Colors.blue.shade300,
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: const Center(
+                                child: Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "MileStone Title",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 3,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Date Posted",
+                                          style: TextStyle(
+                                            color: Colors.white54,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "MileStone Description hwiw ocjowejnwd edjiojwewii eauh esh tyrftxe fjcyrytvtty uywehuh ws",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ],
+                          );
+                        }),
+                  )
+                : const Center(
+                    child: Text(
+                      "No Milestone Recorded yet",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                height: 124,
-                decoration: BoxDecoration(
-                    color: Colors.pink.shade300,
-                    borderRadius: BorderRadius.circular(15)),
-                child: const Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "MileStone Title",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 3,
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Date Posted",
-                            style: TextStyle(
-                              color: Colors.white54,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "MileStone Description hwiw ocjowejnwd edjiojwewii eauh esh tyrftxe fjcyrytvtty uywehuh ws",
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
+                  )
           ],
         ),
       ),
