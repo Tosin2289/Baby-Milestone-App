@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 class MilestoneController extends GetxController {
   static MilestoneController get instance => Get.find();
   final _mybox = Hive.box("myBox");
-  List<Milestone> milestones = [];
+  RxList<Milestone> milestones = <Milestone>[].obs;
   late Rx<File?> pickedFile;
   XFile? imageFile;
   pickedImageFileFromGallery() async {
