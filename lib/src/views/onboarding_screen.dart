@@ -1,5 +1,6 @@
 import 'package:baby_milestone_app/src/views/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
@@ -34,6 +35,8 @@ class OnBoardingScreen extends StatelessWidget {
               ElevatedButton(
                 child: const Text('Get Started'),
                 onPressed: () {
+                  final storage = GetStorage();
+                  storage.write("isFirstTime", false);
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const HomePage();
                   }));
