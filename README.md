@@ -1,16 +1,16 @@
 # baby_milestone_app
+A Baby milestone appliction to record cherishable moments in a baby's life like is first walk,smile e.t.c 
+made with 
+Flutter : For the app ui
+Getx : For the state mangement
+Hive : For the local database
+Get_storage : To store sessions
 
-A new Flutter project.
 
-## Getting Started
+## Demos
+<img src='https://github.com/Tosin2289/Baby-Milestone-App/assets/66890167/8ff29354-0ac4-4a28-b06a-d2d5e356af20' width='200'>
+<img src='https://github.com/Tosin2289/Baby-Milestone-App/assets/66890167/45fe87e0-d723-46bf-99bc-3ff7a43184a7' width='200'>
+<img src='https://github.com/Tosin2289/Baby-Milestone-App/assets/66890167/d101cbad-50aa-470f-a76c-c73770ae128b' width='200'>
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
