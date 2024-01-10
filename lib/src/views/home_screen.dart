@@ -1,3 +1,4 @@
+import 'package:baby_milestone_app/src/views/details_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'add_new_milestone_screen.dart';
@@ -42,7 +43,11 @@ class HomeScreen extends StatelessWidget {
               height: 10,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const DetailsScreen();
+                }));
+              },
               child: Container(
                 height: 124,
                 decoration: BoxDecoration(
