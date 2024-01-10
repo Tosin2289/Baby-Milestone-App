@@ -52,84 +52,91 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 10,
             ),
-            controller.milestones.isNotEmpty
-                ? Expanded(
-                    child: ListView.separated(
-                        separatorBuilder: (context, index) => const SizedBox(
-                              height: 10,
-                            ),
-                        itemCount: controller.milestones.length,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return const DetailsScreen();
-                              }));
-                            },
-                            child: Container(
-                              height: 124,
-                              decoration: BoxDecoration(
-                                  color: Colors.blue.shade300,
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: const Center(
-                                child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: [
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          "MileStone Title",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 3,
-                                      ),
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          "Date Posted",
-                                          style: TextStyle(
-                                            color: Colors.white54,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          "MileStone Description hwiw ocjowejnwd edjiojwewii eauh esh tyrftxe fjcyrytvtty uywehuh ws",
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
+            if (controller.milestones.isNotEmpty)
+              Obx(() {
+                return Expanded(
+                  child: ListView.separated(reverse:true,
+                      separatorBuilder: (context, index) => const SizedBox(
+                            height: 10,
+                          ),
+                      itemCount: controller.milestones.length,
+                      itemBuilder: (context, index) {
+                        final data = controller.milestones[index];
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return DetailsScreen(
+                                milestone: data,
+                                color: Colors.primaries[index].shade300,
+                              );
+                            }));
+                          },
+                          child: Container(
+                            height: 124,
+                            decoration: BoxDecoration(
+                                color: Colors.primaries[index].shade300,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        data.title.toString(),
+                                        style: const TextStyle(
                                             color: Colors.white,
-                                            fontSize: 18,
-                                          ),
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 3,
+                                    ),
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        data.time.toString(),
+                                        style: const TextStyle(
+                                          color: Colors.white54,
+                                          fontSize: 12,
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        data.description.toString(),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.left,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
-                          );
-                        }),
-                  )
-                : const Center(
-                    child: Text(
-                      "No Milestone Recorded yet",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  )
+                          ),
+                        );
+                      }),
+                );
+              })
+            else
+              const Center(
+                child: Text(
+                  "No Milestone Recorded yet",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              )
           ],
         ),
       ),

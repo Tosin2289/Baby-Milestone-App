@@ -1,13 +1,26 @@
-import 'package:baby_milestone_app/src/views/fullscreen.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
-class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key});
+import 'package:baby_milestone_app/src/models/milestone.dart';
 
+class DetailsScreen extends StatefulWidget {
+  final Milestone milestone;
+  final Color color;
+  const DetailsScreen({
+    Key? key,
+    required this.milestone,
+    required this.color,
+  }) : super(key: key);
+
+  @override
+  State<DetailsScreen> createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade300,
+      backgroundColor: widget.color,
       appBar: AppBar(
         leading: InkWell(
             onTap: () {
@@ -17,17 +30,17 @@ class DetailsScreen extends StatelessWidget {
               Icons.arrow_back_ios,
               color: Colors.white,
             )),
-        backgroundColor: Colors.blue.shade300,
+        backgroundColor: widget.color,
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
-            const Align(
+            Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Milestone Title",
-                style: TextStyle(
+                widget.milestone.title.toString(),
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 22,
                     fontWeight: FontWeight.bold),
@@ -35,25 +48,23 @@ class DetailsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const FullScreen();
-                }));
-              },
               child: Container(
                 height: 250,
                 decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: FileImage(widget.milestone.image!),
+                      fit: BoxFit.cover),
                   color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
             ),
             const SizedBox(height: 15),
-            const Align(
+            Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Milestone description",
-                style: TextStyle(
+                widget.milestone.description.toString(),
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                 ),

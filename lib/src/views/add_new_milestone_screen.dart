@@ -26,6 +26,9 @@ class _AddNewMileStonrScreenState extends State<AddNewMileStonrScreen> {
   }
 
   var controller = MilestoneController.instance;
+
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +48,7 @@ class _AddNewMileStonrScreenState extends State<AddNewMileStonrScreen> {
                 CircleAvatar(
                     backgroundColor: Colors.grey.shade200,
                     radius: 80,
-                    child: controller.pickedFile == null
+                    child: controller.imageFile == null
                         ? Center(
                             child: IconButton(
                               icon: const Icon(Icons.add, color: Colors.grey),
@@ -54,7 +57,8 @@ class _AddNewMileStonrScreenState extends State<AddNewMileStonrScreen> {
                               },
                             ),
                           )
-                        : Image.memory(bytes)),
+                        : Image.file(controller.pickedFile.value!,
+                            fit: BoxFit.cover)),
                 const SizedBox(
                   height: 50,
                 ),
@@ -116,7 +120,17 @@ class _AddNewMileStonrScreenState extends State<AddNewMileStonrScreen> {
                           backgroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.addToList(
+                            titleController.text,
+                            descriptionController.text,
+                            selectedDate.toLocal().toString(),
+                            controller.pickedFile.value!);
+
+                        Navigator.of(context).pop;
+                        titleController.clear();
+                        descriptionController.clear();
+                      },
                       child: const Text("Record Milestone")),
                 ),
               ],
